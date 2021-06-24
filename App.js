@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   NativeBaseProvider,
@@ -9,6 +9,7 @@ import {
   Button,
   Stack,
   Icon,
+  Modal,
 } from "native-base";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 
@@ -43,6 +44,7 @@ const newColorTheme = {
 const theme = extendTheme({ colors: newColorTheme });
 
 export default function App() {
+  const [showModal, setShowModal] = useState(false);
   return (
     // <View style={styles.container}>
     //   <Text>Open up App.js to start working on your app!</Text>
@@ -87,11 +89,44 @@ export default function App() {
             startIcon={
               <Icon as={MaterialCommunityIcons} name="email" size={5} />
             }
+            onPress={() => setShowModal(true)}
           >
-            Email
+            Open Modal
           </Button>
         </Box>
       </Stack>
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+        <Modal.Content maxWidth="400px">
+          <Modal.CloseButton />
+          <Modal.Header>Modal Title</Modal.Header>
+          <Modal.Body>
+            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud
+            ullamco deserunt aute id consequat veniam incididunt duis in sint
+            irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit
+            officia tempor esse quis. Sunt ad dolore quis aute consequat. Magna
+            exercitation reprehenderit magna aute tempor cupidatat consequat
+            elit dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt
+            cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim
+            ullamco deserunt aute id consequat veniam incididunt duis in sint
+            irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit
+            officia tempor esse quis. Sunt ad dolore quis aute consequat. Magna
+            exercitation reprehenderit magna aute tempor cupidatat consequat
+            elit dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt
+            cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim
+            exercitation reprehenderit magna aute tempor cupidatat consequat
+            elit dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt
+            cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim
+            ullamco deserunt aute id consequat veniam incididunt duis in sint
+            irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit
+          </Modal.Body>
+          <Modal.Footer>
+            <Button.Group variant="ghost" space={2}>
+              <Button>Learn More</Button>
+              <Button onPress={() => setShowModal(false)}>ACCEPT</Button>
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
     </NativeBaseProvider>
   );
 }
